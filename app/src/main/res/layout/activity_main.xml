@@ -45,7 +45,8 @@
                 android:hint="Add Tag"
                 android:singleLine="true"
                 android:background="@color/background_floating_material_dark"
-                android:textColor="@color/orange">
+                android:textColor="@color/orange"
+                android:imeOptions="actionDone">
             </EditText>
 
 

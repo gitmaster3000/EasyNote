@@ -10,10 +10,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.internal.widget.AdapterViewCompat;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -61,7 +64,7 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String temp_tag = tags.get(position);
-                //chnage note adapter's data set here using this new tag
+                //view.setBackgroundColor(234);
             }
         });
 
@@ -85,7 +88,33 @@ public class MainActivity extends AppCompatActivity{
 
         final EditText mEditText = (EditText) findViewById(R.id.EditText01);
         mEditText.setImeActionLabel("Add Tag", KeyEvent.KEYCODE_ENTER);
-        mEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+        mEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == 66) {
+                    String tag = mEditText.getText().toString();
+                    if (!tag.matches("")) {
+                        //this change here
+                        long check = mHandler.addTag(tag);
+                        if (check == -1) {
+                            Toast.makeText(getApplicationContext(), "Tag already exists!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            tags.add(tag);
+                            mAdapter.notifyDataSetChanged();//ppp
+                            mEditText.setText("");
+                        }
+
+                    }
+                    InputMethodManager imm =
+                            (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(mEditText.getWindowToken(), 0);
+                }
+                return false;
+            }
+        });
+
+        /*mEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
@@ -104,7 +133,7 @@ public class MainActivity extends AppCompatActivity{
                     }
                 }
             }
-        });
+        });*/
 
     }
 }
