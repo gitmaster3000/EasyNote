@@ -7,8 +7,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.internal.widget.AdapterViewCompat;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -55,10 +57,34 @@ public class MainActivity extends AppCompatActivity{
 
         mDrawerToggle.syncState();
 
-        //listView.getOnItemLongClickListener;
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String temp_tag = tags.get(position);
+                //chnage note adapter's data set here using this new tag
+            }
+        });
+
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int pos, long id) {
+                String temp_tag = tags.get(pos);
+                mHandler.deleteTag(temp_tag);
+                for (int i = 0; i < tags.size(); i++) {
+                    if (tags.get(i) == temp_tag) //should I do tags.get(i).toString ()???
+                    {
+                        tags.remove(i);
+                        break;
+                    }
+                }
+                Toast.makeText(getApplicationContext(), temp_tag + " deleted!", Toast.LENGTH_SHORT).show();
+                mAdapter.notifyDataSetChanged();
+                return true;
+            }
+        });
 
         final EditText mEditText = (EditText) findViewById(R.id.EditText01);
-        mEditText.setImeActionLabel("Add", KeyEvent.KEYCODE_ENTER);
+        mEditText.setImeActionLabel("Add Tag", KeyEvent.KEYCODE_ENTER);
         mEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -67,12 +93,9 @@ public class MainActivity extends AppCompatActivity{
                     if (!tag.matches("")) {
                         //this change here
                         long check = mHandler.addTag(tag);
-                        if (check == -1)
-                        {
+                        if (check == -1) {
                             Toast.makeText(getApplicationContext(), "Tag already exists!", Toast.LENGTH_SHORT).show();
-                        }
-                        else
-                        {
+                        } else {
                             tags.add(tag);
                             mAdapter.notifyDataSetChanged();//ppp
                             mEditText.setText("");

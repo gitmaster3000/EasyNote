@@ -39,11 +39,11 @@ public class NotesAdapter extends BaseAdapter {
         NotesDataSet=dbHandler.getAllNotes();
 
     }
-public void changeDataset(String Tag){
 
-    NotesDataSet=dbHandler.getAllNotesByTag(Tag);
-    notifyDataSetChanged();
+    public void changeDataset(String Tag){
+        NotesDataSet=dbHandler.getAllNotesByTag(Tag);
+        notifyDataSetChanged();
 
-}
+    }
 
 }
