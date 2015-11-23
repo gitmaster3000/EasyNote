@@ -43,6 +43,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:hint="Add Tag"
+                android:singleLine="true"
                 android:background="@color/background_floating_material_dark"
                 android:textColor="@color/orange">
             </EditText>
