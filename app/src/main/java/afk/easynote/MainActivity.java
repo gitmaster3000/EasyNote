@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity{
                         else
                         {
                             tags.add(tag);
-                            mAdapter.notifyDataSetChanged();
+                            mAdapter.notifyDataSetChanged();//ppp
                             mEditText.setText("");
                         }
 
