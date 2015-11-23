@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -65,10 +66,18 @@ public class MainActivity extends AppCompatActivity{
                     String tag = mEditText.getText().toString();
                     if (!tag.matches("")) {
                         //this change here
-                        mHandler.addTag(tag);
-                        tags.add(tag);
-                        mAdapter.notifyDataSetChanged();
-                        mEditText.setText("");
+                        long check = mHandler.addTag(tag);
+                        if (check == -1)
+                        {
+                            Toast.makeText(getApplicationContext(), "Tag already exists!", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            tags.add(tag);
+                            mAdapter.notifyDataSetChanged();
+                            mEditText.setText("");
+                        }
+
                     }
                 }
             }
