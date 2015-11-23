@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity{
                 if (!hasFocus) {
                     String tag = mEditText.getText().toString();
                     if (!tag.matches("")) {
+                        //this change here
 
                     }
                 }
