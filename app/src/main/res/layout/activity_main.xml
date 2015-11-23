@@ -55,7 +55,7 @@
                 android:layout_gravity="start"
                 android:background="@color/background_material_dark"
                 android:choiceMode="singleChoice"
-                android:dividerHeight="0dp" />
+                android:dividerHeight="4dp" />
 
 
         </LinearLayout>

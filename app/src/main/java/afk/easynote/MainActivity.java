@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity{
         ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(this,mDrawerLayout, toolbar,R.string.app_name,
                 R.string.app_name);
         ListView listView = (ListView)findViewById(R.id.left_drawer);
-        listView.setAdapter(new ArrayAdapter<Integer>(this, android.R.layout.simple_list_item_1, new Integer[]{1, 2, 3, 4}));
+        listView.setAdapter(new ArrayAdapter<Integer>(this,R.layout.list, new Integer[]{1, 2, 3, 4}));
 
 
         mDrawerLayout.setDrawerListener(mDrawerToggle);
