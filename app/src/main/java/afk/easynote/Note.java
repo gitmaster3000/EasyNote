@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Note {
     public String text;
-    public int id;
+    public long id;
     public String title;
     public int type;
     public List<String> tags;

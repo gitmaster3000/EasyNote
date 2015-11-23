@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity{
     List<String>  tags;
     DatabaseHandler mHandler;
     ArrayAdapter <String> mAdapter;
-
+   static List<Note>  NotesDataSet;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity{
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         mAdapter = new ArrayAdapter<String>(this, R.layout.list, tags);
 
-
+        NotesDataSet=mHandler.getAllNotes();
 
         mFragmentManager = getSupportFragmentManager();
         mFragmentTransaction = mFragmentManager.beginTransaction();
