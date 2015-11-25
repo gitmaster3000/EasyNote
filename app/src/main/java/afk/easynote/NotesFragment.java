@@ -1,5 +1,6 @@
 package afk.easynote;
 
+import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -94,15 +95,19 @@ gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
         public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
 
             int selectCount = gv.getCheckedItemCount();
-
+            MenuItem item = (MenuItem) mode.getMenu().findItem(R.id.share_item);
 
             switch (selectCount) {
                 case 1:
                     mode.setSubtitle("One item selected");
-
+                    mode.getMenuInflater().inflate(R.menu.contextual_list_view, mode.getMenu());
+                    item = (MenuItem) mode.getMenu().findItem(R.id.share_item);
+                    item.setEnabled(true);
                     break;
                 default:
                     mode.setSubtitle("" + selectCount + " items selected");
+                    item = (MenuItem) mode.getMenu().findItem(R.id.share_item);
+                    item.setEnabled(false);
                     break;
             }
         }
