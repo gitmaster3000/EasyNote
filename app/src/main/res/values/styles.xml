@@ -4,11 +4,19 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
 <item name="android:textColorPrimary">@color/whit</item>
-        <item name ="android:actionModeBackground">@color/blue</item>
+
+        <item name ="android:colorPrimary">@color/blue</item>
         <item name="windowActionModeOverlay">true</item>
 
 
+    </style>
+    <style name="AppTheme.Base" parent="Theme.AppCompat.Light">
 
+        <item name="actionModeStyle">@style/CustomActionMode</item>
+    </style>
+
+    <style name="CustomActionMode" parent="@style/Widget.AppCompat.ActionMode">
+        <item name="background">@color/primary_material_light</item>
     </style>
 
 

@@ -12,9 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/toolbar"
-
+        android:theme="@style/AppTheme.Base"
         android:background="#4878b6"
-        app:title="Drawer With Swipe Tabs" />
+        app:title="@string/app_name" />
     <android.support.v4.widget.DrawerLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"

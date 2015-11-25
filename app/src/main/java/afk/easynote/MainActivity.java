@@ -56,8 +56,7 @@ public class MainActivity extends AppCompatActivity{
 
 
         android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
-        ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(this,mDrawerLayout, toolbar,R.string.app_name,
-                R.string.app_name);
+        ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(this,mDrawerLayout, toolbar,R.string.app_name,R.string.app_name);
         listView = (ListView)findViewById(R.id.left_drawer);
         listView.setAdapter(mAdapter);
 
@@ -88,7 +87,7 @@ public class MainActivity extends AppCompatActivity{
                 }
                 Toast.makeText(getApplicationContext(), temp_tag + " deleted!", Toast.LENGTH_SHORT).show();
                 mAdapter.notifyDataSetChanged();
-                return true;
+                return false;
             }
         });
 

@@ -133,8 +133,8 @@ gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 for (int i = itemCount - 1; i >= 0; i--) {
                     if (checkedItemPositions.get(i)) {
 
-                        act.mHandler.deleteNoteOrReminder(act.NotesDataSet.get(i).id);
-                        act.NotesDataSet.remove(i);
+                        act.mHandler.deleteNoteOrReminder(notesAdapter.getItem(i).id);
+                       notesAdapter.updateDataSet();
                     }
                 }
                 notesAdapter.notifyDataSetChanged();
