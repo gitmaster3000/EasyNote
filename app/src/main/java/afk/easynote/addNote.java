@@ -185,7 +185,7 @@ else
 
             details.setEnabled(true);
             title.setEnabled(true);
-
+//
 
             return true;
         }
