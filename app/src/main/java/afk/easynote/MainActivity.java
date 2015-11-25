@@ -85,9 +85,9 @@ public class MainActivity extends AppCompatActivity{
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //String temp_tag = tags.get(position);
-                //notesAdapter.changeDataset(temp_tag);
-                Toast.makeText(getApplicationContext(), " Bro, you tapped?", Toast.LENGTH_SHORT).show();
+                String temp_tag = tags.get(position);
+                notesAdapter.changeDataset(temp_tag);
+                //Toast.makeText(getApplicationContext(), " Bro, you tapped?", Toast.LENGTH_SHORT).show();
             }
         });
 

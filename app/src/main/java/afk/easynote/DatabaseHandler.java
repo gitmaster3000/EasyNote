@@ -217,7 +217,7 @@ create table note_tags
         List<Note> mNotes = new ArrayList<Note>();
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cur = db.rawQuery("select id, title, note_text,type from note_tags join notes on note_id = id where type = 0 and tag_name = " + tag, null);
+        Cursor cur = db.rawQuery("select notes.id, title, note_text,type from note_tags join notes on (note_id = notes.id) where type = 0 and tag_name = '" + tag + "'", null);
 
         if (cur.moveToFirst())
         {
