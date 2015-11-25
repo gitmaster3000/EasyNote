@@ -33,7 +33,7 @@ public class NotesFragment extends Fragment {
 
         FragmentView = inflater.inflate(R.layout.notes_layout, null);
          act = (MainActivity)getActivity();
-        notesAdapter = new NotesAdapter(act.mHandler,act);
+        notesAdapter =act.notesAdapter;
 gs=new gridSelect();
      gv = (GridView) FragmentView.findViewById(R.id.NotesGrid);
         gv.setChoiceMode(GridView.CHOICE_MODE_MULTIPLE_MODAL);
@@ -71,7 +71,7 @@ gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
     @Override
     public void onResume() {
-        notesAdapter.notifyDataSetChanged();
+        notesAdapter.updateDataSet();
         super.onResume();
 
 
@@ -154,4 +154,8 @@ gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
         }
     }
-
+/* TO-DO
+* Alarm Reciever and notification
+* Reminders Activity
+* Location Reminder using services
+* Facebook Integration*/

@@ -26,14 +26,18 @@ public class MainActivity extends AppCompatActivity{
     NavigationView mNavigationView;
     FragmentManager mFragmentManager;
     FragmentTransaction mFragmentTransaction;
+    TabFragment tabFragment;
+    NotesAdapter notesAdapter;
 
     ListView listView;
     static  List<String>  tags;
+    static String notesFragmentTag;
     DatabaseHandler mHandler;
     ArrayAdapter <String> mAdapter;
    static List<Note>  NotesDataSet;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -44,17 +48,18 @@ public class MainActivity extends AppCompatActivity{
         mAdapter = new ArrayAdapter<String>(this, R.layout.list, tags);
 
         NotesDataSet=mHandler.getAllNotes();
-
+        notesAdapter = new NotesAdapter(mHandler,this);
         mFragmentManager = getSupportFragmentManager();
         mFragmentTransaction = mFragmentManager.beginTransaction();
-        mFragmentTransaction.replace(R.id.containerView,new TabFragment()).commit();
+       tabFragment = new TabFragment();
+        mFragmentTransaction.replace(R.id.containerView,tabFragment).commit();
+
 
         android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
         ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(this,mDrawerLayout, toolbar,R.string.app_name,
                 R.string.app_name);
         listView = (ListView)findViewById(R.id.left_drawer);
         listView.setAdapter(mAdapter);
-
 
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
@@ -63,8 +68,9 @@ public class MainActivity extends AppCompatActivity{
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String temp_tag = tags.get(position);
-                //view.setBackgroundColor(234);
+             //   String temp_tag = tags.get(position);
+              // notesAdapter.changeDataset(temp_tag);
+                Toast.makeText(getApplicationContext(), " deleted!", Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -83,7 +83,14 @@ convertView = layoutInflater.inflate(R.layout.notes_grid,parent,false);
         mainActivity=(MainActivity)activity;
 
     }
+public void updateDataSet(){
+    NotesDataSet=dbHandler.getAllNotes();
+    notifyDataSetChanged();
 
+
+
+
+}
     public void changeDataset(String Tag){
      NotesDataSet=dbHandler.getAllNotesByTag(Tag);
         notifyDataSetChanged();

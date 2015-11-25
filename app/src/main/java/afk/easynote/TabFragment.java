@@ -6,6 +6,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ public class TabFragment extends Fragment {
     public static TabLayout tabLayout;
     public static ViewPager viewPager;
     public static int int_items = 2;
+    public MyAdapter adapter;
 
     @Nullable
     @Override
@@ -33,7 +35,8 @@ public class TabFragment extends Fragment {
         /**
          *Set an Apater for the View Pager
          */
-        viewPager.setAdapter(new MyAdapter(getChildFragmentManager()));
+        adapter = new MyAdapter(getChildFragmentManager());
+        viewPager.setAdapter(adapter);
 
         /**
          * Now , this is a workaround ,
@@ -50,6 +53,10 @@ public class TabFragment extends Fragment {
 
         return x;
 
+    }
+public String getFragmentTag( int fragmentPosition)
+    {
+        return "android:switcher:" + R.id.viewpager + ":" + fragmentPosition;
     }
 
     class MyAdapter extends FragmentPagerAdapter {
@@ -97,6 +104,10 @@ public class TabFragment extends Fragment {
             }
             return null;
         }
+
+
     }
+
+
 
 }

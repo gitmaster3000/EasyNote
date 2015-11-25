@@ -201,8 +201,16 @@ if(callState.equals("NEW")) {
     String detailsString = details.getText().toString();
     Note add = new Note(detailsString, titleString, 0, TagsOnNote);
     add.id = db.insertNoteOrReminder(add);
-    MainActivity.NotesDataSet.add(add);
 }
+
+        if(callState.equals("EDIT")) {
+            String titleString = title.getText().toString();
+            String detailsString = details.getText().toString();
+            Note add = new Note(detailsString, titleString, 0, TagsOnNote);
+            add.id =getIntent().getLongExtra("NOTE_ID", 0);
+           db.updateNoteOrReminder(add);
+        }
+
 
     }
 }
