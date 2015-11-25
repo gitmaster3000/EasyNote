@@ -64,15 +64,6 @@ public class MainActivity extends AppCompatActivity{
 
         mDrawerToggle.syncState();
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-             //   String temp_tag = tags.get(position);
-              // notesAdapter.changeDataset(temp_tag);
-                Toast.makeText(getApplicationContext(), " deleted!", Toast.LENGTH_SHORT).show();
-            }
-        });
-
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int pos, long id) {
@@ -88,6 +79,15 @@ public class MainActivity extends AppCompatActivity{
                 Toast.makeText(getApplicationContext(), temp_tag + " deleted!", Toast.LENGTH_SHORT).show();
                 mAdapter.notifyDataSetChanged();
                 return false;
+            }
+        });
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //String temp_tag = tags.get(position);
+                //notesAdapter.changeDataset(temp_tag);
+                Toast.makeText(getApplicationContext(), " Bro, you tapped?", Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -10,5 +10,5 @@
     android:elevation="20dp"
     android:textColor="@color/whit"
 
-android:clickable="true"
+
     android:minHeight="?android:attr/listPreferredItemHeightSmall" />

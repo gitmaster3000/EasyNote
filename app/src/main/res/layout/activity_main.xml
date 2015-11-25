@@ -58,7 +58,7 @@
                 android:background="@color/background_material_dark"
                 android:choiceMode="singleChoice"
                 android:dividerHeight="4dp"
-
+                android:longClickable="true"
                 />
 
 
