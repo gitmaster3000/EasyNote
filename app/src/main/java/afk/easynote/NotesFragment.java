@@ -1,7 +1,5 @@
 package afk.easynote;
 
-import android.content.ClipData;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,10 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Checkable;
-import android.widget.FrameLayout;
 import android.widget.GridView;
 
 public class NotesFragment extends Fragment {
@@ -101,12 +96,12 @@ gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 case 1:
                     mode.setSubtitle("One item selected");
                     mode.getMenuInflater().inflate(R.menu.contextual_list_view, mode.getMenu());
-                    item = (MenuItem) mode.getMenu().findItem(R.id.share_item);
+
                     item.setEnabled(true);
                     break;
                 default:
                     mode.setSubtitle("" + selectCount + " items selected");
-                    item = (MenuItem) mode.getMenu().findItem(R.id.share_item);
+                    item.setIcon(R.drawable.fb_close);
                     item.setEnabled(false);
                     break;
             }
@@ -148,6 +143,10 @@ gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 mode.finish();
 
             }
+
+
+
+
             return true;
         }
         @Override

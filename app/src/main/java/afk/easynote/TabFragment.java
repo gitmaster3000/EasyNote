@@ -6,7 +6,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -75,7 +74,7 @@ public String getFragmentTag( int fragmentPosition)
                 case 0:
                     return new NotesFragment();
                 case 1:
-                    return new SocialFragment();
+                    return new ReminderFragment();
 
             }
             return null;
@@ -99,7 +98,7 @@ public String getFragmentTag( int fragmentPosition)
                 case 0:
                     return "Notes";
                 case 1:
-                    return "Social";
+                    return "Reminders";
 
             }
             return null;
