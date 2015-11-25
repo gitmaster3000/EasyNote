@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity{
     FragmentTransaction mFragmentTransaction;
 
     ListView listView;
-    List<String>  tags;
+    static  List<String>  tags;
     DatabaseHandler mHandler;
     ArrayAdapter <String> mAdapter;
    static List<Note>  NotesDataSet;

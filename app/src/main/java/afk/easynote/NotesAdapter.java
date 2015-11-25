@@ -2,11 +2,17 @@ package afk.easynote;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.ResolveInfo;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.BaseAdapter;
+import android.widget.Checkable;
+import android.widget.CheckedTextView;
+import android.widget.FrameLayout;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -20,18 +26,19 @@ public class NotesAdapter extends BaseAdapter {
 
     DatabaseHandler dbHandler;
     MainActivity mainActivity;
+     List<Note>  NotesDataSet=mainActivity.NotesDataSet;
     @Override
     public int getCount() {
 
 
-        return mainActivity.NotesDataSet.size();
+        return NotesDataSet.size();
     }
 
     @Override
     public Note getItem(int position) {
 
 
-        return mainActivity.NotesDataSet.get(position);
+        return NotesDataSet.get(position);
 
     }
 
@@ -43,20 +50,30 @@ public class NotesAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         //arg2 is the view group
+
+
+       CheckableTextView i;
+
+
         if (convertView == null) {
-            LayoutInflater inflater = (LayoutInflater)mainActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.list, parent, false);
+
+           /*     i.setLayoutParams(new ViewGroup.LayoutParams( GridView.LayoutParams.MATCH_PARENT,
+                        GridView.LayoutParams.WRAP_CONTENT));
+            i.setTextColor(mainActivity.getResources().getColor(R.color.));
+                l = new CheckableLayout(mainActivity);
+                l.setLayoutParams(new GridView.LayoutParams(
+                        GridView.LayoutParams.WRAP_CONTENT,
+                        GridView.LayoutParams.WRAP_CONTENT));
+                l.addView(i); */
+            LayoutInflater layoutInflater = (LayoutInflater) mainActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+convertView = layoutInflater.inflate(R.layout.notes_grid,parent,false);
         }
 
 
 
-           TextView textView = (TextView)convertView.findViewById(R.id.noteView);
+            i = (CheckableTextView) convertView.findViewById(R.id.noteView);
 
-            textView.setText(mainActivity.NotesDataSet.get(position).title);
-
-
-
-
+            i.setText(NotesDataSet.get(position).title);
 
         return convertView;
     }
@@ -68,7 +85,7 @@ public class NotesAdapter extends BaseAdapter {
     }
 
     public void changeDataset(String Tag){
-        mainActivity.NotesDataSet=dbHandler.getAllNotesByTag(Tag);
+     NotesDataSet=dbHandler.getAllNotesByTag(Tag);
         notifyDataSetChanged();
 
     }

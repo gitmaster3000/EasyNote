@@ -5,9 +5,8 @@
     android:id="@+id/noteView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:textAppearance="?android:attr/textAppearanceListItemSmall"
-    android:gravity="center_vertical"
-    android:elevation="20dp"
-    android:textColor="@color/whit"
-    android:longClickable="true"
+    android:elevation="5dp"
+    android:textColor="@color/black"
+    android:gravity="center"
+    android:background="@color/blue"
     android:minHeight="?android:attr/listPreferredItemHeightSmall" />
