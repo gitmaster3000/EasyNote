@@ -90,10 +90,11 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String temp_tag = tags.get(position);
-                if (tags.equals("All")) {
-                    NotesDataSet = mHandler.getAllNotes();
-                    mDrawerLayout.closeDrawers();
+                if (temp_tag.equals("All")) {
+                    notesAdapter.NotesDataSet = mHandler.getAllNotes();
                     notesAdapter.notifyDataSetChanged();
+                    mDrawerLayout.closeDrawers();
+
                 } else {
                     notesAdapter.changeDataset(temp_tag);
                     mDrawerLayout.closeDrawers();
