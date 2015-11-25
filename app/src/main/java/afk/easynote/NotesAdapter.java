@@ -24,9 +24,9 @@ import java.util.List;
  */
 public class NotesAdapter extends BaseAdapter {
 
-    DatabaseHandler dbHandler;
-    MainActivity mainActivity;
-     List<Note>  NotesDataSet=mainActivity.NotesDataSet;
+    public DatabaseHandler dbHandler;
+    public MainActivity mainActivity;
+     public List<Note>  NotesDataSet=mainActivity.NotesDataSet;
     @Override
     public int getCount() {
 
@@ -77,24 +77,22 @@ convertView = layoutInflater.inflate(R.layout.notes_grid,parent,false);
 
         return convertView;
     }
+
     public NotesAdapter(DatabaseHandler dbParam, Activity activity){
         super();
         dbHandler=dbParam;
         mainActivity=(MainActivity)activity;
 
     }
-public void updateDataSet(){
-    NotesDataSet=dbHandler.getAllNotes();
-    notifyDataSetChanged();
 
-
-
-
-}
-    public void changeDataset(String Tag){
-     NotesDataSet=dbHandler.getAllNotesByTag(Tag);
+    public void updateDataSet(){
+        NotesDataSet=dbHandler.getAllNotes();
         notifyDataSetChanged();
+    }
 
+    public void changeDataset(String Tag){
+        NotesDataSet=dbHandler.getAllNotesByTag(Tag);
+        notifyDataSetChanged();
     }
 
 

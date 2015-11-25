@@ -68,6 +68,10 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int pos, long id) {
                 String temp_tag = tags.get(pos);
+                if (temp_tag.equals("All"))
+                {
+                    return false;
+                }
                 mHandler.deleteTag(temp_tag);
                 for (int i = 0; i < tags.size(); i++) {
                     if (tags.get(i) == temp_tag) //should I do tags.get(i).toString ()???
@@ -86,7 +90,14 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String temp_tag = tags.get(position);
-                notesAdapter.changeDataset(temp_tag);
+                if (tags.equals("All")) {
+                    NotesDataSet = mHandler.getAllNotes();
+                    mDrawerLayout.closeDrawers();
+                    notesAdapter.notifyDataSetChanged();
+                } else {
+                    notesAdapter.changeDataset(temp_tag);
+                    mDrawerLayout.closeDrawers();
+                }
                 //Toast.makeText(getApplicationContext(), " Bro, you tapped?", Toast.LENGTH_SHORT).show();
             }
         });
@@ -94,13 +105,21 @@ public class MainActivity extends AppCompatActivity{
         final EditText mEditText = (EditText) findViewById(R.id.EditText01);
         mEditText.setImeActionLabel("Add Tag", KeyEvent.KEYCODE_ENTER);
 
+
+        if (!(mHandler.addTag("All") == -1))
+        {
+            tags.add("All");
+        }
+
         mEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == 66) {
                     String tag = mEditText.getText().toString();
                     if (!tag.matches("")) {
-                        //this change here
+                        if (tag.equals("All")) {
+                            return false;
+                        }
                         long check = mHandler.addTag(tag);
                         if (check == -1) {
                             Toast.makeText(getApplicationContext(), "Tag already exists!", Toast.LENGTH_SHORT).show();

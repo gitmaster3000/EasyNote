@@ -343,6 +343,10 @@ create table note_tags
 
     public void deleteTag (String tag)
     { //should functionality to delete all notes with this tag be provided?
+        if (tag.equals("All"))
+        {
+            return;
+        }
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete("note_tags", "tag_name = ?", new String[] {tag});
         db.delete("tags", "tag_name = ?", new String[] {tag});
