@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity{
     FragmentTransaction mFragmentTransaction;
     TabFragment tabFragment;
     NotesAdapter notesAdapter;
+    RemindersAdapter remindersAdapter;
 
     ListView listView;
     static  List<String>  tags;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity{
     DatabaseHandler mHandler;
     ArrayAdapter <String> mAdapter;
    static List<Note>  NotesDataSet;
+    static List<Note>  RemindersDataSet;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,8 +52,12 @@ public class MainActivity extends AppCompatActivity{
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         mAdapter = new ArrayAdapter<String>(this, R.layout.list, tags);
 
+//
         NotesDataSet=mHandler.getAllNotes();
+        RemindersDataSet=mHandler.getAllReminders();
         notesAdapter = new NotesAdapter(mHandler,this);
+       remindersAdapter= new RemindersAdapter(mHandler,this);
+
         mFragmentManager = getSupportFragmentManager();
         mFragmentTransaction = mFragmentManager.beginTransaction();
         tabFragment = new TabFragment();
