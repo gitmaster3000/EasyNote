@@ -116,6 +116,7 @@ public class NotesFragment extends Fragment {
 
 
     class gridSelect implements AbsListView.MultiChoiceModeListener {
+        ActionMode mode;
         @Override
         public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
 
@@ -148,6 +149,7 @@ public class NotesFragment extends Fragment {
 
         @Override
         public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+            this.mode=mode;
             return false;
         }
         public void delete_item(){   SparseBooleanArray checkedItemPositions = gv.getCheckedItemPositions();
@@ -162,6 +164,7 @@ public class NotesFragment extends Fragment {
                 }
             }
             notesAdapter.notifyDataSetChanged();
+            mode.finish();
         }
 
         @Override
@@ -171,7 +174,7 @@ public class NotesFragment extends Fragment {
             if (item.getItemId() == (mode.getMenu().findItem(R.id.delete_item).getItemId())) {
 
                 dialog_delete delete = new dialog_delete(this);
-                delete.show(getFragmentManager(),getTag());
+                delete.show(getFragmentManager(), getTag());
 
 
 
