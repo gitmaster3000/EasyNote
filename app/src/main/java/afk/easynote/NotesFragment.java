@@ -1,11 +1,16 @@
 package afk.easynote;
 
+import android.app.FragmentManager;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.util.SparseBooleanArray;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
@@ -20,9 +25,7 @@ import android.widget.Button;
 import android.widget.Checkable;
 import android.widget.FrameLayout;
 import android.widget.GridView;
-
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
+import android.widget.Toast;
 
 public class NotesFragment extends Fragment {
     View FragmentView;
@@ -30,12 +33,17 @@ public class NotesFragment extends Fragment {
     NotesAdapter notesAdapter;
     GridView gv;
     gridSelect gs;
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Toast.makeText(getActivity(), "Result: " + resultCode,
+                Toast.LENGTH_SHORT).show();
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-
 
         FragmentView = inflater.inflate(R.layout.notes_layout, null);
         act = (MainActivity)getActivity();
@@ -45,13 +53,6 @@ public class NotesFragment extends Fragment {
         gv.setChoiceMode(GridView.CHOICE_MODE_MULTIPLE_MODAL);
         gv.setMultiChoiceModeListener(gs);
         gv.setAdapter(notesAdapter);
-        AdView mAdView = (AdView) FragmentView.findViewById(R.id.adView);
-        AdRequest request = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)        // All emulators
-                .addTestDevice(act.deviceId)  // My Galaxy Nexus test phone
-                .build();
-        mAdView.loadAd(request);
-//dsd
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -101,6 +102,23 @@ public class NotesFragment extends Fragment {
 
     }
 
+    public void delete_item(){   SparseBooleanArray checkedItemPositions = gv.getCheckedItemPositions();
+        int itemCount = gv.getCount();
+
+
+        for (int i = itemCount - 1; i >= 0; i--) {
+            if (checkedItemPositions.get(i)) {
+
+                act.mHandler.deleteNoteOrReminder(notesAdapter.getItem(i).id);
+                notesAdapter.updateDataSet();
+            }
+        }
+        notesAdapter.notifyDataSetChanged();
+    }
+
+
+
+
 
     class gridSelect implements AbsListView.MultiChoiceModeListener {
         @Override
@@ -140,19 +158,12 @@ public class NotesFragment extends Fragment {
 
         @Override
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+
             SparseBooleanArray checkedItemPositions = gv.getCheckedItemPositions();
             if (item.getItemId() == (mode.getMenu().findItem(R.id.delete_item).getItemId())) {
-                int itemCount = gv.getCount();
 
-                for (int i = itemCount - 1; i >= 0; i--) {
-                    if (checkedItemPositions.get(i)) {
-
-                        act.mHandler.deleteNoteOrReminder(notesAdapter.getItem(i).id);
-                        notesAdapter.updateDataSet();
-                    }
-                }
-                notesAdapter.notifyDataSetChanged();
-
+                dialog_delete delete = new dialog_delete();
+                delete.show(getFragmentManager(),getTag());
 
                 mode.finish();
 
@@ -165,7 +176,7 @@ public class NotesFragment extends Fragment {
                     if (checkedItemPositions.get(i))
                     {
                         Intent ints = new Intent(act.getApplicationContext(), fb_module.class);
-                        Note n = act.notesAdapter.NotesDataSet.get (i);
+                        Note n =act.notesAdapter.NotesDataSet.get (i);
                         String title = n.title;
                         String body = n.text;
                         ints.putExtra("title", title);

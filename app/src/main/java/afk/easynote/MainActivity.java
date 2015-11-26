@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity{
    static List<Note>  NotesDataSet;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
