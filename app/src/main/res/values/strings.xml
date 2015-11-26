@@ -8,4 +8,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_add_note">addNote</string>
     <string name="spinner_text">ADD TAGS</string>
+    <string name="facebook_app_id">500816413432442</string>
+    <string name="title_activity_fb_module">fb_module</string>
 </resources>

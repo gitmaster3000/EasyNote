@@ -19,6 +19,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.FacebookSdk;
+
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity{
@@ -41,6 +43,8 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        FacebookSdk.sdkInitialize(getApplicationContext());
+
         mHandler = new DatabaseHandler(this);
         tags = mHandler.getAllTags();
 
@@ -51,7 +55,7 @@ public class MainActivity extends AppCompatActivity{
         notesAdapter = new NotesAdapter(mHandler,this);
         mFragmentManager = getSupportFragmentManager();
         mFragmentTransaction = mFragmentManager.beginTransaction();
-       tabFragment = new TabFragment();
+        tabFragment = new TabFragment();
         mFragmentTransaction.replace(R.id.containerView,tabFragment).commit();
 
 

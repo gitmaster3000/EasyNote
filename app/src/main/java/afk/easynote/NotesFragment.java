@@ -101,12 +101,10 @@ gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 case 1:
                     mode.setSubtitle("One item selected");
                     mode.getMenuInflater().inflate(R.menu.contextual_list_view, mode.getMenu());
-                    item = (MenuItem) mode.getMenu().findItem(R.id.share_item);
                     item.setEnabled(true);
                     break;
                 default:
                     mode.setSubtitle("" + selectCount + " items selected");
-                    item = (MenuItem) mode.getMenu().findItem(R.id.share_item);
                     item.setEnabled(false);
                     break;
             }
@@ -130,9 +128,8 @@ gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
         @Override
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-
+            SparseBooleanArray checkedItemPositions = gv.getCheckedItemPositions();
             if (item.getItemId() == (mode.getMenu().findItem(R.id.delete_item).getItemId())) {
-                SparseBooleanArray checkedItemPositions = gv.getCheckedItemPositions();
                 int itemCount = gv.getCount();
 
                 for (int i = itemCount - 1; i >= 0; i--) {
@@ -147,6 +144,27 @@ gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                 mode.finish();
 
+            }
+
+            else if (item.getItemId() == (mode.getMenu().findItem(R.id.share_item).getItemId())) {
+                int count = gv.getCount();
+                for (int i = count-1; i >= 0; i--)
+                {
+                    if (checkedItemPositions.get(i))
+                    {
+                        Intent ints = new Intent(act.getApplicationContext(), fb_module.class);
+                        Note n = act.NotesDataSet.get (i);
+                        String title = n.title;
+                        String body = n.text;
+                        ints.putExtra("title", title);
+                        ints.putExtra("body", body);
+                        startActivity(ints);
+                        break;
+                    }
+                }
+
+
+                mode.finish();
             }
             return true;
         }
