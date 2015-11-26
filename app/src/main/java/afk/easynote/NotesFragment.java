@@ -21,6 +21,9 @@ import android.widget.Checkable;
 import android.widget.FrameLayout;
 import android.widget.GridView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 public class NotesFragment extends Fragment {
     View FragmentView;
     MainActivity act;
@@ -32,6 +35,8 @@ public class NotesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+
+
         FragmentView = inflater.inflate(R.layout.notes_layout, null);
         act = (MainActivity)getActivity();
         notesAdapter =act.notesAdapter;
@@ -40,6 +45,13 @@ public class NotesFragment extends Fragment {
         gv.setChoiceMode(GridView.CHOICE_MODE_MULTIPLE_MODAL);
         gv.setMultiChoiceModeListener(gs);
         gv.setAdapter(notesAdapter);
+        AdView mAdView = (AdView) FragmentView.findViewById(R.id.adView);
+        AdRequest request = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)        // All emulators
+                .addTestDevice(act.deviceId)  // My Galaxy Nexus test phone
+                .build();
+        mAdView.loadAd(request);
+
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -153,7 +165,7 @@ public class NotesFragment extends Fragment {
                     if (checkedItemPositions.get(i))
                     {
                         Intent ints = new Intent(act.getApplicationContext(), fb_module.class);
-                        Note n = act.NotesDataSet.get (i);
+                        Note n = act.notesAdapter.NotesDataSet.get (i);
                         String title = n.title;
                         String body = n.text;
                         ints.putExtra("title", title);

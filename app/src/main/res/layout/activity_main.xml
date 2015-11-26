@@ -30,6 +30,7 @@
 
             android:id="@+id/containerView">
 
+
         </FrameLayout>
 
         <LinearLayout
@@ -64,7 +65,6 @@
 
         </LinearLayout>
     </android.support.v4.widget.DrawerLayout>
-
 
 
 </LinearLayout>

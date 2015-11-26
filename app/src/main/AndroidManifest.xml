@@ -8,7 +8,8 @@
         android:allowBackup="true"
         android:icon="@mipmap/easynote5"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme"
+        android:windowSoftInputMode="stateVisible|adjustPan">
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
