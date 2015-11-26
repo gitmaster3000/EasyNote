@@ -19,8 +19,6 @@ public class RemindersAdapter extends BaseAdapter {
      public List<Note> RemindersDataSet=mainActivity.RemindersDataSet;
     @Override
     public int getCount() {
-
-
         return RemindersDataSet.size();
     }
 

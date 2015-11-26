@@ -26,6 +26,8 @@ import android.widget.Checkable;
 import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.Toast;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 public class NotesFragment extends Fragment {
     View FragmentView;
@@ -65,6 +67,12 @@ public class NotesFragment extends Fragment {
 
             }
         });
+        AdView mAdView = (AdView) FragmentView.findViewById(R.id.adView);
+        AdRequest request = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)        // All emulators
+                .addTestDevice(act.deviceId)  // My Galaxy Nexus test phone
+                .build();
+        mAdView.loadAd(request);
         Button button = (Button)FragmentView.findViewById(R.id.noteAdd);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
