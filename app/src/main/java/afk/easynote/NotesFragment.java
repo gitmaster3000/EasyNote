@@ -110,19 +110,6 @@ public class NotesFragment extends Fragment {
 
     }
 
-    public void delete_item(){   SparseBooleanArray checkedItemPositions = gv.getCheckedItemPositions();
-        int itemCount = gv.getCount();
-
-
-        for (int i = itemCount - 1; i >= 0; i--) {
-            if (checkedItemPositions.get(i)) {
-
-                act.mHandler.deleteNoteOrReminder(notesAdapter.getItem(i).id);
-                notesAdapter.updateDataSet();
-            }
-        }
-        notesAdapter.notifyDataSetChanged();
-    }
 
 
 
@@ -163,6 +150,19 @@ public class NotesFragment extends Fragment {
         public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
             return false;
         }
+        public void delete_item(){   SparseBooleanArray checkedItemPositions = gv.getCheckedItemPositions();
+            int itemCount = gv.getCount();
+
+
+            for (int i = itemCount - 1; i >= 0; i--) {
+                if (checkedItemPositions.get(i)) {
+
+                    act.mHandler.deleteNoteOrReminder(notesAdapter.getItem(i).id);
+                    notesAdapter.updateDataSet();
+                }
+            }
+            notesAdapter.notifyDataSetChanged();
+        }
 
         @Override
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
@@ -170,10 +170,10 @@ public class NotesFragment extends Fragment {
             SparseBooleanArray checkedItemPositions = gv.getCheckedItemPositions();
             if (item.getItemId() == (mode.getMenu().findItem(R.id.delete_item).getItemId())) {
 
-                dialog_delete delete = new dialog_delete();
+                dialog_delete delete = new dialog_delete(this);
                 delete.show(getFragmentManager(),getTag());
 
-                mode.finish();
+
 
             }
 

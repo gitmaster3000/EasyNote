@@ -18,6 +18,7 @@ import android.view.ViewGroup;
  * A simple {@link Fragment} subclass.
  */
 public class dialog_delete extends DialogFragment {
+    NotesFragment.gridSelect n;
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
@@ -25,8 +26,8 @@ public class dialog_delete extends DialogFragment {
         builder.setMessage("Are you sure you want to delete these items?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        notifyToTarget(Activity.RESULT_OK);
 
+                        n.delete_item();
                     }
                 })
                 .setNegativeButton("NO", new DialogInterface.OnClickListener() {
@@ -39,6 +40,12 @@ public class dialog_delete extends DialogFragment {
 
 
     }
+public dialog_delete(NotesFragment.gridSelect n){
+    super();
+
+    this.n=n;
+
+}
 
     private void notifyToTarget(int code) {
         Fragment targetFragment = getTargetFragment();
