@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity{
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         mAdapter = new ArrayAdapter<String>(this, R.layout.list, tags);
 
-
+//
         NotesDataSet=mHandler.getAllNotes();
         RemindersDataSet=mHandler.getAllReminders();
         notesAdapter = new NotesAdapter(mHandler,this);
