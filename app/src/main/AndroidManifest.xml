@@ -24,6 +24,8 @@
         </activity>
         <activity
             android:name=".addNote"
+
+            android:windowSoftInputMode="stateVisible|adjustPan"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
