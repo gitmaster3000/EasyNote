@@ -2,43 +2,33 @@ package afk.easynote;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.pm.ResolveInfo;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.BaseAdapter;
-import android.widget.Checkable;
-import android.widget.CheckedTextView;
-import android.widget.FrameLayout;
-import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
 /**
  * Created by The Abster on 11/23/2015.
  */
-public class NotesAdapter extends BaseAdapter {
+public class RemindersAdapter extends BaseAdapter {
 
     public DatabaseHandler dbHandler;
     public MainActivity mainActivity;
-     public List<Note>  NotesDataSet=mainActivity.NotesDataSet;
+     public List<Note> RemindersDataSet=mainActivity.RemindersDataSet;
     @Override
     public int getCount() {
 
 
-        return NotesDataSet.size();
+        return RemindersDataSet.size();
     }
 
     @Override
     public Note getItem(int position) {
 
 
-        return NotesDataSet.get(position);
+        return RemindersDataSet.get(position);
 
     }
 
@@ -73,26 +63,26 @@ convertView = layoutInflater.inflate(R.layout.notes_grid,parent,false);
 
             i = (CheckableTextView) convertView.findViewById(R.id.noteView);
 
-            i.setText(NotesDataSet.get(position).title);
+            i.setText(RemindersDataSet.get(position).title);
 
         return convertView;
     }
 
-    public NotesAdapter(DatabaseHandler dbParam, Activity activity){
+    public RemindersAdapter(DatabaseHandler dbParam, Activity activity){
         super();
         dbHandler=dbParam;
         mainActivity=(MainActivity)activity;
-        NotesDataSet=mainActivity.NotesDataSet;
+       RemindersDataSet=mainActivity.NotesDataSet;
 
     }
 
     public void updateDataSet(){
-        NotesDataSet=dbHandler.getAllNotes();
+        RemindersDataSet=dbHandler.getAllReminders();
         notifyDataSetChanged();
     }
 
     public void changeDataset(String Tag){
-        NotesDataSet=dbHandler.getAllNotesByTag(Tag);
+        RemindersDataSet=dbHandler.getAllRemindersByTag(Tag);
         notifyDataSetChanged();
     }
 
