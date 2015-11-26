@@ -36,20 +36,26 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:textColor="@color/black"
+        android:textStyle="bold"
         android:inputType="text" />
   <FrameLayout
       android:layout_width="match_parent"
-      android:layout_height="match_parent">
+      android:layout_height="match_parent"
+
+      >
 
       <EditText
+
           android:layout_width="match_parent"
           android:layout_height="match_parent"
           android:id="@+id/NoteDetails"
-          android:background="@color/whit"
+
           android:gravity="left"
           android:inputType="textMultiLine"
           android:elegantTextHeight="true"
-
+android:background="@drawable/details_bg"
+          android:lineSpacingMultiplier="1.15"
+          android:paddingLeft="4dp"
           android:textStyle="normal"
           android:textColor="@color/black"
           android:selectAllOnFocus="false"
