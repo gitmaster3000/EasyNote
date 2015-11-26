@@ -51,7 +51,7 @@ public class NotesFragment extends Fragment {
                 .addTestDevice(act.deviceId)  // My Galaxy Nexus test phone
                 .build();
         mAdView.loadAd(request);
-
+//dsd
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
