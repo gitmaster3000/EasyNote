@@ -1,5 +1,7 @@
 package afk.easynote;
 
+import android.content.ClipData;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,7 +15,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Checkable;
+import android.widget.FrameLayout;
 import android.widget.GridView;
 
 public class NotesFragment extends Fragment {
@@ -28,25 +33,25 @@ public class NotesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         FragmentView = inflater.inflate(R.layout.notes_layout, null);
-         act = (MainActivity)getActivity();
+        act = (MainActivity)getActivity();
         notesAdapter =act.notesAdapter;
-gs=new gridSelect();
-     gv = (GridView) FragmentView.findViewById(R.id.NotesGrid);
+        gs=new gridSelect();
+        gv = (GridView) FragmentView.findViewById(R.id.NotesGrid);
         gv.setChoiceMode(GridView.CHOICE_MODE_MULTIPLE_MODAL);
         gv.setMultiChoiceModeListener(gs);
         gv.setAdapter(notesAdapter);
-gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-        Intent intent = new Intent(act, addNote.class);
-        intent.putExtra("TAG", "VIEW");
-        Note a = notesAdapter.getItem(position);
-        intent.putExtra("NOTE_ID", a.id);
-        startActivity(intent);
+                Intent intent = new Intent(act, addNote.class);
+                intent.putExtra("TAG", "VIEW");
+                Note a = notesAdapter.getItem(position);
+                intent.putExtra("NOTE_ID", a.id);
+                startActivity(intent);
 
-    }
-});
+            }
+        });
         Button button = (Button)FragmentView.findViewById(R.id.noteAdd);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,12 +76,12 @@ gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
         super.onResume();
 
 
-}
+    }
 
     public void addNote(){
         DatabaseHandler db = new DatabaseHandler(act);
 
-      Intent intent = new Intent(act,addNote.class);
+        Intent intent = new Intent(act,addNote.class);
         intent.putExtra("TAG", "NEW");
         startActivity(intent);
 
@@ -85,7 +90,7 @@ gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
     }
 
 
-   class gridSelect implements AbsListView.MultiChoiceModeListener {
+    class gridSelect implements AbsListView.MultiChoiceModeListener {
         @Override
         public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
 
@@ -96,12 +101,10 @@ gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 case 1:
                     mode.setSubtitle("One item selected");
                     mode.getMenuInflater().inflate(R.menu.contextual_list_view, mode.getMenu());
-
                     item.setEnabled(true);
                     break;
                 default:
                     mode.setSubtitle("" + selectCount + " items selected");
-                    item.setIcon(R.drawable.fb_close);
                     item.setEnabled(false);
                     break;
             }
@@ -125,16 +128,15 @@ gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
         @Override
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-
+            SparseBooleanArray checkedItemPositions = gv.getCheckedItemPositions();
             if (item.getItemId() == (mode.getMenu().findItem(R.id.delete_item).getItemId())) {
-                SparseBooleanArray checkedItemPositions = gv.getCheckedItemPositions();
                 int itemCount = gv.getCount();
 
                 for (int i = itemCount - 1; i >= 0; i--) {
                     if (checkedItemPositions.get(i)) {
 
                         act.mHandler.deleteNoteOrReminder(notesAdapter.getItem(i).id);
-                       notesAdapter.updateDataSet();
+                        notesAdapter.updateDataSet();
                     }
                 }
                 notesAdapter.notifyDataSetChanged();
@@ -144,9 +146,26 @@ gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             }
 
+            else if (item.getItemId() == (mode.getMenu().findItem(R.id.share_item).getItemId())) {
+                int count = gv.getCount();
+                for (int i = count-1; i >= 0; i--)
+                {
+                    if (checkedItemPositions.get(i))
+                    {
+                        Intent ints = new Intent(act.getApplicationContext(), fb_module.class);
+                        Note n = act.NotesDataSet.get (i);
+                        String title = n.title;
+                        String body = n.text;
+                        ints.putExtra("title", title);
+                        ints.putExtra("body", body);
+                        startActivity(ints);
+                        break;
+                    }
+                }
 
 
-
+                mode.finish();
+            }
             return true;
         }
         @Override
@@ -156,8 +175,8 @@ gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 
 
-        }
     }
+}
 /* TO-DO
 * Alarm Reciever and notification
 * Reminders Activity
