@@ -1,7 +1,5 @@
 package afk.easynote;
 
-import android.content.ClipData;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,10 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Checkable;
-import android.widget.FrameLayout;
 import android.widget.GridView;
 
 public class NotesFragment extends Fragment {
@@ -101,10 +96,12 @@ gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 case 1:
                     mode.setSubtitle("One item selected");
                     mode.getMenuInflater().inflate(R.menu.contextual_list_view, mode.getMenu());
+
                     item.setEnabled(true);
                     break;
                 default:
                     mode.setSubtitle("" + selectCount + " items selected");
+                    item.setIcon(R.drawable.fb_close);
                     item.setEnabled(false);
                     break;
             }
@@ -128,8 +125,9 @@ gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
         @Override
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-            SparseBooleanArray checkedItemPositions = gv.getCheckedItemPositions();
+
             if (item.getItemId() == (mode.getMenu().findItem(R.id.delete_item).getItemId())) {
+                SparseBooleanArray checkedItemPositions = gv.getCheckedItemPositions();
                 int itemCount = gv.getCount();
 
                 for (int i = itemCount - 1; i >= 0; i--) {
@@ -146,26 +144,9 @@ gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             }
 
-            else if (item.getItemId() == (mode.getMenu().findItem(R.id.share_item).getItemId())) {
-                int count = gv.getCount();
-                for (int i = count-1; i >= 0; i--)
-                {
-                    if (checkedItemPositions.get(i))
-                    {
-                        Intent ints = new Intent(act.getApplicationContext(), fb_module.class);
-                        Note n = act.NotesDataSet.get (i);
-                        String title = n.title;
-                        String body = n.text;
-                        ints.putExtra("title", title);
-                        ints.putExtra("body", body);
-                        startActivity(ints);
-                        break;
-                    }
-                }
 
 
-                mode.finish();
-            }
+
             return true;
         }
         @Override
