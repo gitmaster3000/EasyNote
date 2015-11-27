@@ -153,7 +153,7 @@ create table note_tags
         List<Note> mNotes = new ArrayList<Note>();
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cur = db.rawQuery("select * from notes where type = 0", null);
+        Cursor cur = db.rawQuery("select * from notes", null);
 
         if (cur.moveToFirst())
         {

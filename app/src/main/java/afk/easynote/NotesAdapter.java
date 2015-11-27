@@ -72,8 +72,16 @@ convertView = layoutInflater.inflate(R.layout.notes_grid,parent,false);
 
 
             i = (CheckableTextView) convertView.findViewById(R.id.noteView);
+        if(NotesDataSet.get(position).type==1) {
+            i.setTextColor(mainActivity.getResources().getColor(R.color.orange));
+            i.setText(NotesDataSet.get(position).title);
+
+        }
+         else{
 
             i.setText(NotesDataSet.get(position).title);
+
+        }
 
         return convertView;
     }
