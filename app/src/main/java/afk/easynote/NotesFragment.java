@@ -28,7 +28,7 @@ import android.widget.GridView;
 import android.widget.Toast;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-
+//yo
 public class NotesFragment extends Fragment {
     View FragmentView;
     MainActivity act;
