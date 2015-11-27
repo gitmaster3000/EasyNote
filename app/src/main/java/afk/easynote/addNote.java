@@ -11,6 +11,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.support.v7.widget.Toolbar;
 import android.widget.GridView;
@@ -36,13 +37,20 @@ String callState;
         super.onCreate(savedInstanceState);
         db = new DatabaseHandler(this);
         setContentView(R.layout.activity_add_note);
+        Button reminder = (Button)findViewById(R.id.reminder);
+        reminder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+
+            }
+        });
         callState=getIntent().getStringExtra("TAG");
         title = (EditText) findViewById(R.id.Notetitle);
         details = (EditText) findViewById(R.id.NoteDetails);
         gridView = (GridView) findViewById(R.id.TagsGrid);
         setToolbar();
-
+//TODO: Set Alarm in a function call from menu.. For notes with alarm, display as reminders in same tab
         if ( callState.equals("NEW")){
 
 
