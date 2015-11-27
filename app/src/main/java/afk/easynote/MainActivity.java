@@ -8,10 +8,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.internal.widget.AdapterViewCompat;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -19,9 +17,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.facebook.FacebookSdk;
-
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
@@ -34,10 +30,8 @@ public class MainActivity extends AppCompatActivity{
     TabFragment tabFragment;
     NotesAdapter notesAdapter;
     RemindersAdapter remindersAdapter;
-
     ListView listView;
     static  List<String>  tags;
-    static String notesFragmentTag;
     DatabaseHandler mHandler;
     ArrayAdapter <String> mAdapter;
    static List<Note>  NotesDataSet;

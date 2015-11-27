@@ -74,7 +74,7 @@ public String getFragmentTag( int fragmentPosition)
                 case 0:
                     return new NotesFragment();
                 case 1:
-                    return new ReminderFragment();
+                    return new AboutFragment();
 
             }
             return null;
@@ -98,7 +98,7 @@ public String getFragmentTag( int fragmentPosition)
                 case 0:
                     return "Notes";
                 case 1:
-                    return "Reminders";
+                    return "About";
 
             }
             return null;
