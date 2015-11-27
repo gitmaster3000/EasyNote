@@ -198,7 +198,7 @@ isReminder= false;
         //30 seconds for test
         long  alarmTime = System.currentTimeMillis() + timeElapsed ;
         PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, 0);
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, alarmTime, alarmPendingIntent);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTime, alarmPendingIntent);
 
     }
 
