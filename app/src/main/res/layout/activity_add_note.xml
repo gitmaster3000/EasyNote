@@ -42,9 +42,9 @@
         android:textStyle="bold"
         android:inputType="text" />
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="69dp"
         android:background="@drawable/alarm"
-        android:layout_height="match_parent"
+        android:layout_height="49dp"
 
         android:id="@+id/reminder" />
 
